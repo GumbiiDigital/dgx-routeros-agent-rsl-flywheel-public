@@ -1,48 +1,27 @@
-# Case Study: Quarantine Before Promotion
+# Case study: quarantine before promotion
 
-## Context
+## Actual problem
 
-Iterative training systems improve only when feedback is trustworthy. A plausible answer can still be unsafe, unsupported, or privacy-sensitive.
+Multiple corpus generations and evaluation paths made it possible for a naive flywheel to contaminate holdouts, repeat privacy defects, or reward unsafe action behavior.
 
-## Problem
+## Source-backed sequence
 
-A naive flywheel feeds every correction back into the next training set. That can blur the holdout boundary, repeat private details, and reward behavior that acts without sufficient evidence.
+1. V1 and V2 evolved into sanitized source-grounded V3 material.
+2. Retrieval manifests and evaluation reports stayed beside build scripts.
+3. V3 full and guarded adapters were quarantined after holdout regression.
+4. A v1 restart was bounded at 500 train, 100 validation, and 100 holdout rows.
+5. V2 expanded to 3,500 train, 350 validation, and a frozen 500-case holdout; its run was rejected.
 
-## What I built
+## Failed hypotheses
 
-The public design uses distinct destinations for evaluated items:
+- Bigger training material automatically improves behavior: unsupported.
+- Private-safe is automatically action-safe: false.
+- One aggregate score is enough for promotion: false.
 
-- promote_candidate for items that satisfy quality, privacy, and action-safety gates;
-- quarantine for items with a known defect or unresolved risk; and
-- reject for items that should not re-enter the loop.
+## Bounded tests and acceptance gates
 
-Holdout evaluation remains isolated from training input. Reviewer feedback changes the item record, not the historical result.
+Source scripts provide manifest checks, retrieval checks, privacy lint, holdout evaluation, action-safety review, and receipt verification. Promotion requires provenance, schema, privacy, holdout quality, and action-safety gates with no unresolved quarantine reason.
 
-## Engineering decisions
+## Result
 
-- Sanitization happens before an item becomes eligible for training.
-- Provenance class is mandatory even when the source text is synthetic.
-- Privacy and action safety are independent gates.
-- Aggregate scale is described qualitatively in public.
-- A promotion decision includes reasons, not just a score.
-- Quarantine is durable until a targeted review clears it.
-
-## Representative artifact
-
-The synthetic evaluation record shows a fictional holdout item, gate results, a quarantine path, and the evidence required for later promotion. It contains no private corpus text or operational metric.
-
-## Evidence available here
-
-- The evaluation record parses as JSON.
-- The record clearly identifies synthetic provenance.
-- Promotion gates and quarantine reasons are explicit.
-- The repository checker rejects common private-data patterns.
-- CI runs the same publication gate.
-
-## Lessons
-
-A flywheel is safer when it can stop. The promotion gate should protect the next training cycle from both low-quality behavior and privacy leakage.
-
-## Limitations
-
-No model, corpus, private score, or training result is published here. The case study documents methodology only.
+The concrete result is a refusal and quarantine path. The public branch keeps that decision visible and does not claim a promoted adapter.

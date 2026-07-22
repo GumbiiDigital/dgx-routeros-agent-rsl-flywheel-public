@@ -1,13 +1,10 @@
 ```mermaid
 flowchart LR
-  S["synthetic-corpus.example"] --> P["Privacy and schema lint"]
-  P --> T["Training candidate pool"]
-  T --> M["Candidate model"]
-  M --> H["Isolated holdout evaluation"]
-  H --> G{"Quality and action-safety gates"}
-  G -->|Pass| C["Promotion candidate"]
-  G -->|Unresolved| Q["Quarantine"]
-  G -->|Fail| R["Reject"]
-  Q --> F["Reviewer feedback"]
-  F --> P
+    I["Sanitized corpus and retrieval manifests"] --> T["Training candidate"]
+    T --> H["Isolated holdout evaluation"]
+    H --> Q{"Privacy, quality, and action-safety gates"}
+    Q -->|fail or unresolved| X["Quarantine with reason"]
+    Q -->|pass and reviewed| P["Promotion record"]
+    X --> R["Targeted review and re-evaluation"]
+    R --> H
 ```

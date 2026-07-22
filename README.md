@@ -1,78 +1,45 @@
-# DGX RouterOS Agent RSL Flywheel Public
+# DGX RouterOS Agent RSL Flywheel
 
-I built this repository as a public research interface for privacy-safe training, evaluation, and feedback-loop methods for a network-focused AI assistant. The emphasis is not dataset volume. It is evidence quality, quarantine, holdout integrity, and promotion safety.
+I built this as the public record for a research flywheel around a network-focused agent. The private source preserves sanitized corpora, holdouts, retrieval manifests, reports, training runs, and promotion gates. This branch records the evidence discipline without publishing raw corpus text or operational identity.
 
 ## What I built
 
-The design covers:
+1. Versioned corpus and retrieval layouts with manifests and source references.
+2. Separate train, validation, and holdout material.
+3. Privacy and action-safety checks before promotion.
+4. Evaluation reports that retain failure modes instead of hiding them in one score.
+5. Quarantine and promotion decisions with explicit reasons.
+6. Reproducible build, refresh, evaluation, and receipt-verification scripts.
 
-- synthetic and sanitized corpus intake;
-- schema and privacy validation;
-- training-candidate preparation;
-- isolated holdout evaluation;
-- action-safety scoring;
-- failure quarantine;
-- reviewer feedback; and
-- promotion gates that require both quality and privacy evidence.
+## Recorded results
+
+| Observation | Source evidence | Status |
+|---|---|---|
+| V1/V2/V3 corpus generations are recorded | source manifests and README | Historical |
+| V3 contains 2,383 sanitized source-grounded public/synthetic examples | source README | Historical |
+| V3 adapters were quarantined after holdout regression | source README/reports | Historical decision |
+| v1 restart uses 500/100/100 train/validation/holdout | source corpus | Historical |
+| v2 uses 3,500/350 plus a frozen 500-case holdout and was rejected | source corpus/README | Historical decision |
 
 ## Why it matters
 
-A flywheel can amplify mistakes as easily as it amplifies useful behavior. If failed examples, private details, or unsafe actions re-enter training without control, the loop becomes less trustworthy over time.
-
-I treat quarantine and promotion as first-class engineering components.
+A flywheel amplifies useful behavior and mistakes. Holdout contamination, private strings, unsafe actions, or unresolved failures should stop promotion.
 
 ## Engineering approach
 
-Corpus items carry provenance class, sanitization state, task type, expected evidence, and allowed action level. Holdout material stays separate from training material. Evaluation results are grouped by behavior rather than presented as a single score.
+Corpus items carry provenance and sanitization state. Evaluation separates quality, privacy, and action safety. Quarantine is durable until targeted review clears it.
 
-Promotion requires:
-
-- privacy scan pass;
-- schema pass;
-- holdout quality pass;
-- action-safety pass;
-- no unresolved quarantine reason; and
-- human review for boundary changes.
-
-Scale is described broadly because operational corpus metrics are not part of this public surface.
-
-## Synthetic public-safe architecture
-
-The diagram shows a fictional research pipeline and does not reproduce a private corpus or deployment.
+## Sanitized architecture boundary
 
 See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
-## Representative work and artifacts
-
-- [Case study](docs/CASE-STUDY.md) - how quarantine protects a feedback loop.
-- [Synthetic evaluation record](examples/synthetic-evaluation-record.json) - promotion and refusal evidence in JSON.
-- [Publication safety](docs/PUBLICATION-SAFETY.md) - corpus and reporting boundary.
-- [Share copy](docs/SHARE.md) - public explanation in my voice.
-- [Safety checker](scripts/check_publication_safety.py) - repository privacy gate.
-
-## Evidence and lessons
-
-This repository proves only the public structure: an original evaluation schema, a synthetic architecture, explicit promotion gates, valid JSON, and automated privacy checks. It does not publish private metrics or claim a trained model has passed these gates.
-
-The central lesson is that quarantined failures are valuable evidence. They should be inspected and classified, not silently recycled.
-
 ## Repository map
 
-| Path | Purpose |
-|---|---|
-| README.md | Research interface and limits |
-| docs/CASE-STUDY.md | Quarantine and promotion case study |
-| docs/ARCHITECTURE.md | Synthetic Mermaid flywheel |
-| docs/PUBLICATION-SAFETY.md | Corpus publication rules |
-| docs/SHARE.md | Share-ready copy |
-| examples/ | Synthetic JSON evaluation |
-| scripts/check_publication_safety.py | Privacy and structure checker |
-| .github/workflows/publication-safety.yml | CI gate |
+- [docs/CASE-STUDY.md](docs/CASE-STUDY.md)
+- [docs/RSL-EVALUATION-RECORD.md](docs/RSL-EVALUATION-RECORD.md)
+- [docs/PUBLICATION-SAFETY.md](docs/PUBLICATION-SAFETY.md)
+- [examples/synthetic-evaluation-record.json](examples/synthetic-evaluation-record.json)
 
-## Publication boundary
+## Evidence rules and limits
 
-This is a public project interface, not an operational training repository. I exclude live addresses, hostnames, hardware identities, accounts, local paths, credentials, raw telemetry, private corpora, service inventories, private topology, equipment maps, controller identities, and operational commands. Examples are synthetic and do not reproduce a live environment.
-
-## Limitations
-
-This repository does not disclose corpus size, model state, private evaluation metrics, deployment status, or promotion results. The example record is illustrative and is not evidence of a completed training run.
+Readings are historical private-source evidence. This is a public project interface, not an operational training repository; it contains no raw private corpus, model weights, addresses, accounts, or deployment claims.
