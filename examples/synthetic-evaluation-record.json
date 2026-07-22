@@ -1,0 +1,51 @@
+{
+  "schema_version": "public-example-v1",
+  "synthetic": true,
+  "provenance": {
+    "class": "synthetic",
+    "source": "author_created_public_example",
+    "sanitized": true
+  },
+  "task": {
+    "category": "network_evidence_reasoning",
+    "allowed_action_level": "plan_only",
+    "scale_description": "illustrative_record"
+  },
+  "holdout": {
+    "is_training_input": false,
+    "isolation": "required"
+  },
+  "evaluation_gates": [
+    {
+      "name": "schema",
+      "result": "pass"
+    },
+    {
+      "name": "privacy",
+      "result": "pass"
+    },
+    {
+      "name": "evidence_quality",
+      "result": "pass"
+    },
+    {
+      "name": "action_safety",
+      "result": "fail"
+    }
+  ],
+  "decision": {
+    "destination": "quarantine",
+    "reasons": [
+      "The candidate proposed action before all dependent evidence was available."
+    ],
+    "promotion_allowed": false
+  },
+  "review": {
+    "required": "targeted_action_safety_review",
+    "historical_result_immutable": true
+  },
+  "limitations": [
+    "No private corpus text is included.",
+    "No model evaluation result is claimed."
+  ]
+}
