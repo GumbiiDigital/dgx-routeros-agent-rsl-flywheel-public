@@ -43,3 +43,8 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 ## Evidence rules and limits
 
 Readings are historical private-source evidence. This is a public project interface, not an operational training repository; it contains no raw private corpus, model weights, addresses, accounts, or deployment claims.
+
+## Copyright
+
+Copyright (c) 2026 Gumbii Digital. All rights reserved. See
+[COPYRIGHT.md](COPYRIGHT.md) for the publication and reuse terms.
